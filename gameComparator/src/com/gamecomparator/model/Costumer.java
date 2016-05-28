@@ -19,13 +19,15 @@ public class Costumer {
     private Key key;
 	
     @Persistent
-    private String name;
+    private String username;
 	
     @Persistent
     private String email;
 	
-    @Persistent
-    private Date date;
+
+	public Costumer(String username2, String email2) {
+		this.setName(username2);
+		this.setEmail(email2);	}
 
 	public Key getKey() {
 		return key;
@@ -36,11 +38,11 @@ public class Costumer {
 	}
 
 	public String getName() {
-		return name;
+		return username;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.username = name;
 	}
 
 	public String getEmail() {
@@ -51,11 +53,4 @@ public class Costumer {
 		this.email = email;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
 }
