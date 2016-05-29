@@ -6,6 +6,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import com.gamecomparator.model.Costumer;
 import com.gamecomparator.model.CostumerDC;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
@@ -21,7 +22,7 @@ public class GameScrappingServlet extends HttpServlet {
 		        // it would most likely result in an IllegalStateException
 
 		        // "/" is relative to the context root (your web-app name)
-		        RequestDispatcher view = req.getRequestDispatcher("index.jsp");
+		        RequestDispatcher view = req.getRequestDispatcher("login.jsp");
 		        // don't add your web-app name to the path
 
 		        view.forward(req, resp);   
@@ -29,14 +30,18 @@ public class GameScrappingServlet extends HttpServlet {
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 		      throws IOException {
-		    System.out.println("Login");
+		    System.out.println("Login o registro de usuarios");
 		    User user = (User) req.getAttribute("user");
 		    if (user == null) {
 		      UserService userService = UserServiceFactory.getUserService();
 		      user = userService.getCurrentUser();
 		    }
 
-		    CostumerDC.add(user.getNickname(),user.getEmail());
+		    Costumer costumer = new Costumer(req.getParameter("username"),
+					req.getParameter("email"),
+					req.getParameter("password"));
+		    //Aañadimos el usuario al datastore
+			CostumerDC.add(costumer);	
 		    
 		    resp.sendRedirect("index.jsp");
 		  }

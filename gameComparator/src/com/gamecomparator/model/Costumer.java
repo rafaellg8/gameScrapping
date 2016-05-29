@@ -1,15 +1,16 @@
 package com.gamecomparator.model;
 
-/**
- * @author Rafael Lachica Garrido
- * Clase Modelo Cliente
- */
-import java.util.Date;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.SecretKeySpec;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.labs.repackaged.com.google.common.hash.HashFunction;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @PersistenceCapable
 public class Costumer {
@@ -23,11 +24,15 @@ public class Costumer {
 	
     @Persistent
     private String email;
-	
 
-	public Costumer(String username2, String email2) {
+    @Persistent
+    private String password;
+
+	public Costumer(String username2, String email2, String password) {
 		this.setName(username2);
-		this.setEmail(email2);	}
+		this.setEmail(email2);
+		this.setPassword(password);
+	}
 
 	public Key getKey() {
 		return key;
@@ -51,6 +56,52 @@ public class Costumer {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public void setPassword(String pass){
+		//Codificamos el password y encriptamos
+		this.password = pass;
+		encrypt();
+	}
+	
+	public boolean isPassword(String pass){
+		return isEqualPassword(pass);
+	}
+	
+	/**
+	 * Funcion para encriptar las contraseñas
+	 */
+	private void encrypt(){
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+			messageDigest.update(this.password.getBytes());
+			this.password =  new String(messageDigest.digest());
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Funcion para comprobar las contraseñas son correctas
+	 * @return true o false dependiendo de si las contraseñas son o no correctas
+	 */
+	private Boolean isEqualPassword(String value){
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+			messageDigest.update(value.getBytes());
+			value = new String (messageDigest.digest()); //Encriptamos
+			
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Comprobamos que las contraseñas sean iguales
+		if (value.equals(this.password))
+			return true;
+		else
+			return false;
+		
 	}
 
 }
