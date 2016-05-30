@@ -3,255 +3,465 @@
 <%@ page import="com.google.appengine.api.users.UserService"%>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
 <%@ page import="com.gamecomparator.model.*"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Game Comparator</title>
-<meta charset="utf-8">
-<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script type="text/javascript" src="js/jquery-1.4.2.js"></script>
-<script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
-<script type="text/javascript" src="js/cufon-yui.js"></script>
-<script type="text/javascript" src="js/cufon-replace.js"></script>
-<script type="text/javascript" src="js/CabinSketch_700.font.js"></script>
-<script type="text/javascript" src="js/EB_Garamond_400.font.js"></script>
-<!-- [if lt IE 9]>
-<script type="text/javascript" src="js/html5.js"></script>
-<style type="text/css">
-.bg {behavior:url(js/PIE.htc)}
-</style>
-<![endif]-->
-<!-- [if lt IE 7]>
-<div style='clear:both;text-align:center;position:relative'>
-	<a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" alt="" /></a>
-</div>
-<![endif]-->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Game Comparator</title>
+	<meta name="description" content="Game Comparator - Web Scrapping - Comparador de vieojuegos" />
+	<meta name="keywords" content="html template, css, free, one page, game comparator,games, web design" />
+	<meta name="author" content="Rafael Lachica Garrido" />
+	<!-- Favicons (created with http://realfavicongenerator.net/)-->
+	<link rel="apple-touch-icon" sizes="57x57" href="img/favicons/favicon.ico">
+	<link rel="apple-touch-icon" sizes="60x60" href="img/favicons/favicon.ico">
+	<link rel="icon" type="image/png" href="img/favicons/favicon.ico" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicons/favicon.ico" sizes="16x16">
+	<link rel="manifest" href="img/favicons/manifest.json">
+	<link rel="shortcut icon" href="img/favicons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#00a8ff">
+	<meta name="msapplication-config" content="img/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<!-- Normalize -->
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<!-- Owl -->
+	<link rel="stylesheet" type="text/css" href="css/owl.css">
+	<!-- Animate.css -->
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.1.0/css/font-awesome.min.css">
+	<!-- Elegant Icons -->
+	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
+	<!-- Main style -->
+	<link rel="stylesheet" type="text/css" href="css/cardio.css">
 </head>
-<body id="page1">
-	<%
-		//Usuario local
-		Costumer userLocal = null;
-		if (session.getLastAccessedTime() != 0){
-			String aux = session.getAttribute("user").toString();
-			userLocal = CostumerDC.getCostumer(aux);
-		}
-			//Si la session esta abierta traemos el obeto costumer completo
-		
-	//si no esta logeado creamos el login de google
-		String url ="";
-		String urlLinktext = "";
 
-		//si esta logeado ponemos el logout
-		if (userLocal != null) {
-			url = "/logout";
-			urlLinktext = "Logout";
-		}
-		//Usuario sin loguear
-		else{
-			url = "/login";
-			urlLinktext = "LOGIN";
-		}
-	%>
-
-	<div class="main">
-		<!-- header -->
-		<header>
-			<div class="wrapper">
-				<nav>
-					<ul id="menu">
-						<li id="menu_active"><a href="index.jsp"><span>Game</span>Comparator</a></li>
-						<li><a href="Services.jsp"><span>S</span>ervices</a></li>
-						<li><a href="Productos.jsp"><span>G</span>ames</a></li>
-						<li><a href="About.jsp"><span>A</span>bout</a></li>
-					</ul>
-				</nav>
+<body>
+	<div class="preloader">
+		<img src="img/loader.gif" alt="Preloader image">
+	</div>
+	<nav class="navbar">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><img src="img/logo.jpg"  data-active-url="img/logo-active.png" alt=""></a>
 			</div>
-			<h1>
-				<a href="index.html"
-					style="text-decoration: none; background-color: none; color: white; font-size: 40px">Game
-					Comparator</a>
-			</h1>
-		</header>
-
-
-		<div style="width: 100%;">
-			<div class="log">
-				<span class="glyphicon glyphicon-log-in"><a href="<%=url%>"><%=urlLinktext%></a>
-					<%=(userLocal == null ? "LOGIN" : userLocal.getName())%></span>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right main-nav">
+					<li><a href="#intro">Intro</a></li>
+					<li><a href="#services">Services</a></li>
+					<li><a href="#team">About</a></li>
+					<!--<li><a href="#pricing">Pricing</a></li>-->
+					<li><a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue">Sign Up</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#modal2" class="btn btn-green">Sign In</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<header id="intro">
+		<div class="container">
+			<div class="table">
+				<div class="header-text">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3 class="light white">Game comparator</h3>
+							<h1 class="white typed">Web Scrapping de videojuegos</h1>
+							<span class="typed-cursor">|</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		
-		<div class="ic">Comparator of Games Web Scrapping</div>
-		<!-- / header -->
-		<!-- content -->
-		<section id="content">
-			<div class="wrapper">
-				<article class="col1">
-					<h2>Last best Games</h2>
-					<div class="pad_left1 pad_bot1">
-						<div id="slider">
-							<div id="for_img">
-								<div id="nivo_slider">
-									<!-- Aqui en jsp deberíamos meter juegos -->
-									<img src="images/img1.jpg" alt=""> <img
-										src="images/img2.jpg" alt=""> <img src="images/img3.jpg"
-										alt=""> <img src="images/img4.jpg" alt=""> <img
-										src="images/img5.jpg" alt="">
+	</header>
+	<section>
+		<div class="cut cut-top"></div>
+		<div class="container">
+			<div class="row intro-tables">
+				<div class="col-md-4">
+					<div class="intro-table intro-table-first">
+						<h5 class="white heading">Top Juegos</h5>
+						<div class="owl-carousel owl-schedule bottom">
+							<div class="item">
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Early Exercise</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
+								</div>
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Muscle Building</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
+								</div>
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Cardio</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Early Exercise</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
+								</div>
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Muscle Building</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
+								</div>
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Cardio</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Early Exercise</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
+								</div>
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Muscle Building</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
+								</div>
+								<div class="schedule-row row">
+									<div class="col-xs-6">
+										<h5 class="regular white">Cardio</h5>
+									</div>
+									<div class="col-xs-6 text-right">
+										<h5 class="white">8:30 - 10:00</h5>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="pad">
-							<p>
-								<strong>Game Comparator</strong>
-							</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="intro-table intro-table-hover">
+						<h5 class="white heading hide-hover">Premium Membership</h5>
+						<div class="bottom">
+							<h4 class="white heading small-heading no-margin regular">Register Today</h4>
+							<h4 class="white heading small-pt">20% Discount</h4>
+							<a href="#" class="btn btn-white-fill expand">Register</a>
 						</div>
 					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="intro-table intro-table-third">
+						<h5 class="white heading">Happy Clients</h5>
+						<div class="owl-testimonials bottom">
+							<div class="item">
+								<h4 class="white heading content">I couldn't be more happy with the results!</h4>
+								<h5 class="white heading light author">Adam Jordan</h5>
+							</div>
+							<div class="item">
+								<h4 class="white heading content">I can't believe how much better I feel!</h4>
+								<h5 class="white heading light author">Greg Pardon</h5>
+							</div>
+							<div class="item">
+								<h4 class="white heading content">Incredible transformation and I feel so healthy!</h4>
+								<h5 class="white heading light author">Christina Goldman</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="services" class="section section-padded">
+		<div class="container">
+			<div class="row text-center title">
+				<h2>Services</h2>
+				<h4 class="light muted">Achieve the best results with game comparassions</h4>
+			</div>
+			<div class="row services">
+				<div class="col-md-4">
+					<div class="service">
+						<div class="icon-holder">
+							<img src="img/icons/png/game-controller-1.png" alt="" class="icon">
+						</div>
+						<h4 class="heading">Games</h4>
+						<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="service">
+						<div class="icon-holder">
+							<img src="img/icons/png/mushroom.png" alt="" class="icon">
+						</div>
+						<h4 class="heading">Ratings</h4>
+						<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="service">
+						<div class="icon-holder">
+							<img src="img/icons/png/technology.png" alt="" class="icon">
+						</div>
+						<h4 class="heading">Others</h4>
+						<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cut cut-bottom"></div>
+	</section>
+	<section id="team" class="section gray-bg">
+		<div class="container">
+			<div class="row title text-center">
+				<h2 class="margin-top">Team</h2>
+				<h4 class="light muted">We're a dream team!</h4>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="team text-center">
+						<div class="cover" style="background:url('img/team/team-cover1.jpg'); background-size:cover;">
+							<div class="overlay text-center">
+								<h3 class="white">$69.00</h3>
+								<h5 class="light light-white">1 - 5 sessions / month</h5>
+							</div>
+						</div>
+						<img src="img/team/team3.jpg" alt="Team Image" class="avatar">
+						<div class="title">
+							<h4>Ben Adamson</h4>
+							<h5 class="muted regular">Fitness Instructor</h5>
+						</div>
+						<button data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill">Sign Up Now</button>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="team text-center">
+						<div class="cover" style="background:url('img/team/team-cover2.jpg'); background-size:cover;">
+							<div class="overlay text-center">
+								<h3 class="white">$69.00</h3>
+								<h5 class="light light-white">1 - 5 sessions / month</h5>
+							</div>
+						</div>
+						<img src="img/team/team1.jpg" alt="Team Image" class="avatar">
+						<div class="title">
+							<h4>Eva Williams</h4>
+							<h5 class="muted regular">Personal Trainer</h5>
+						</div>
+						<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill ripple">Sign Up Now</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="team text-center">
+						<div class="cover" style="background:url('img/team/team-cover3.jpg'); background-size:cover;">
+							<div class="overlay text-center">
+								<h3 class="white">$69.00</h3>
+								<h5 class="light light-white">1 - 5 sessions / month</h5>
+							</div>
+						</div>
+						<img src="img/team/team2.jpg" alt="Team Image" class="avatar">
+						<div class="title">
+							<h4>John Phillips</h4>
+							<h5 class="muted regular">Personal Trainer</h5>
+						</div>
+						<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill ripple">Sign Up Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--<section id="pricing" class="section">
+		<div class="container">
+			<div class="row title text-center">
+				<h2 class="margin-top white">Pricing</h2>
+				<h4 class="light white">Choose your favorite pricing plan and sign up today!</h4>
+			</div>
+			<div class="row no-margin">
+				<div class="col-md-7 no-padding col-md-offset-5 pricings text-center">
+					<div class="pricing">
+						<div class="box-main active" data-img="img/pricing1.jpg">
+							<h4 class="white">Yoga Pilates</h4>
+							<h4 class="white regular light">$850.00 <span class="small-font">/ year</span></h4>
+							<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-white-fill">Sign Up Now</a>
+							<i class="info-icon icon_question"></i>
+						</div>
+						<div class="box-second active">
+							<ul class="white-list text-left">
+								<li>One Personal Trainer</li>
+								<li>Big gym space for training</li>
+								<li>Free tools &amp; props</li>
+								<li>Free locker</li>
+								<li>Free before / after shower</li>
+							</ul>
+						</div>
+					</div>
+					<div class="pricing">
+						<div class="box-main" data-img="img/pricing2.jpg">
+							<h4 class="white">Cardio Training</h4>
+							<h4 class="white regular light">$100.00 <span class="small-font">/ year</span></h4>
+							<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-white-fill">Sign Up Now</a>
+							<i class="info-icon icon_question"></i>
+						</div>
+						<div class="box-second">
+							<ul class="white-list text-left">
+								<li>One Personal Trainer</li>
+								<li>Big gym space for training</li>
+								<li>Free tools &amp; props</li>
+								<li>Free locker</li>
+								<li>Free before / after shower</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>-->
+	<section class="section section-padded blue-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="owl-twitter owl-carousel">
+						<div class="item text-center">
+							<i class="icon fa fa-twitter"></i>
+							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
+							<h4 class="light-white light">#health #training #exercise</h4>
+						</div>
+						<div class="item text-center">
+							<i class="icon fa fa-twitter"></i>
+							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
+							<h4 class="light-white light">#health #training #exercise</h4>
+						</div>
+						<div class="item text-center">
+							<i class="icon fa fa-twitter"></i>
+							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
+							<h4 class="light-white light">#health #training #exercise</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-					<h2>
-						<span>Our Solutions</span>
-					</h2>
-					<div class="pad_left1">
-						<div class="pad_left1">
-							<div class="wrapper pad_top1">
-								<div class="col3">
-									<div class="wrapper">
-										<figure class="left marg_right1">
-											<img src="images/page1_img3.png" alt="">
-										</figure>
-										<p class="cols">
-											<strong class="font1">Development</strong><br>Error sit
-											voluptatem accus antium doloremque laiantium totam rem
-											aperiam, eaque tecto beatae.
-										</p>
-									</div>
-								</div>
-								<div class="col3 pad_left2">
-									<div class="wrapper">
-										<figure class="left marg_right1">
-											<img src="images/page1_img5.png" alt="">
-										</figure>
-										<p class="cols">
-											<strong class="font1">Creative Design</strong><br>Eorporis
-											suscipit laboriosam, nisi ut aliquid ex ea commodi eum iure
-											reprehenderit qui in ea voluptate.
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="wrapper">
-								<div class="col3">
-									<div class="wrapper">
-										<figure class="left marg_right1">
-											<img src="images/page1_img4.png" alt="">
-										</figure>
-										<div class="cols">
-											<strong class="font1">Planning</strong><br>Eius modi
-											tempora incidunt aliquam quaerat enim ad minima veniam, quis
-											nostrum exercitationem ullam.
-										</div>
-									</div>
-								</div>
-								<div class="col3 pad_left2">
-									<div class="wrapper">
-										<figure class="left marg_right1">
-											<img src="images/page1_img6.png" alt="">
-										</figure>
-										<div class="cols">
-											<strong class="font1">Effective Strategies</strong><br>Velit
-											esse quam nihil molestiae consequatur, vel illumqui dolorem
-											eum fugiat voluptas laiantium totam rem.
-										</div>
-									</div>
-								</div>
-							</div>
+	<!-- Modal 1  Register -->
+	<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content modal-popup">
+				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+				<h3 class="white">Sign Up</h3>
+				<form action="/register" class="popup-form" method="post">
+					<input type="text" class="form-control form-white" placeholder="User Name" name="username">
+					<input type="email" class="form-control form-white" placeholder="Email Address" name="email">
+					<input type="password" class="form-control form-white" name="password">
+					<div class="checkbox-holder text-left">
+						<div class="checkbox">
+							<input type="checkbox" value="register" id="squaredOne" name="check" required="true"/>
+							<label for="squaredOne"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
 						</div>
 					</div>
-				</article>
+					<button type="submit" class="btn btn-submit">Register</button>
+				</form>
 			</div>
-		</section>
-		<!-- / content -->
-		<!-- footer -->
-		<footer>
-			<div class="wrapper">
-				<article class="col">
-					<h5>Why Us</h5>
-					<ul class="list1">
-						<li><a href="#">Sedut perspiciatis</a></li>
-						<li><a href="#">Unde omnis iste</a></li>
-						<li><a href="#">Natus error sit </a></li>
-						<li><a href="#">Volupttem accus</a></li>
-						<li><a href="#">Ntium doloremque </a></li>
-					</ul>
-				</article>
-				<article class="col pad_left2">
-					<h5>Links</h5>
-					<ul class="list1">
-						<li><a href="https://github.com/rafaellg8/gameScrapping">Github</a></li>
-					</ul>
-				</article>
-				<article class="col pad_left2">
-					<h5>Follow Us</h5>
-					<ul class="icons">
-						<li><a href="#"><img src="images/icon1.jpg" alt="">Facebook</a></li>
-						<li><a href="#"><img src="images/icon2.jpg" alt="">Stumleupon</a></li>
-						<li><a href="#"><img src="images/icon3.jpg" alt="">Twitter</a></li>
-						<li><a href="#"><img src="images/icon4.jpg" alt="">Digg</a></li>
-						<li><a href="#"><img src="images/icon5.jpg" alt="">RSS
-								Feed</a></li>
-					</ul>
-				</article>
-				<article id="newsletter">
-					<h5>Newsletter</h5>
-					<form id="newsletter_form">
-						<div class="wrapper">
-							<input class="input" type="text" value="Enter your email here"
-								onblur="if(this.value=='') this.value='Enter your email here'"
-								onFocus="if(this.value =='Enter your email here' ) this.value=''">
-						</div>
-						<a href="#"
-							onClick="document.getElementById('newsletter_form').submit()">Subscribe</a>
-					</form>
-				</article>
-			</div>
-			<a href="index.jsp" class="footer_logo">Game<span>
-					Comparator</span></a>
-		</footer>
-		<!-- / footer -->
+		</div>
 	</div>
-	<script type="text/javascript">
-		Cufon.now();
-	</script>
-	<script type="text/javascript">
-		$(window).load(function() {
-			$('#nivo_slider').nivoSlider({
-				effect : 'fold', //Specify sets like: 'fold,fade,sliceDown, sliceDownLeft, sliceUp, sliceUpLeft, sliceUpDown, sliceUpDownLeft'
-				slices : 7,
-				animSpeed : 500,
-				pauseTime : 6000,
-				startSlide : 0, //Set starting Slide (0 index)
-				directionNav : true, //Next & Prev
-				directionNavHide : false, //Only show on hover
-				controlNav : true, //1,2,3...
-				controlNavThumbs : false, //Use thumbnails for Control Nav
-				controlNavThumbsFromRel : false, //Use image rel for thumbs
-				controlNavThumbsSearch : '.jpg', //Replace this with...
-				controlNavThumbsReplace : '_thumb.jpg', //...this in thumb Image src
-				keyboardNav : true, //Use left & right arrows
-				pauseOnHover : true, //Stop animation while hovering
-				manualAdvance : false, //Force manual transitions
-				captionOpacity : 1, //Universal caption opacity
-				beforeChange : function() {
-				},
-				afterChange : function() {
-				},
-				slideshowEnd : function() {
-				} //Triggers after all slides have been shown
-			});
-		});
-	</script>
+
+	<!-- Modal 2 Login -->
+	<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content modal-popup">
+				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+				<h3 class="green">Sign in</h3>
+				<form action="/login" class="popup-form" method="post">
+					<input type="text" class="form-control form-white" name="username" placeholder="User Name">
+					<input type="password" class="form-control form-white" name="password">
+					<button type="submit" style="background-color: lightgrey" class="btn btn-submit">Login</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 text-center-mobile">
+					<h3 class="white">Reserve a Free Trial Class!</h3>
+					<h5 class="light regular light-white">Shape your body and improve your health.</h5>
+					<a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a>
+				</div>
+				<div class="col-sm-6 text-center-mobile">
+					<h3 class="white">Opening Hours <span class="open-blink"></span></h3>
+					<div class="row opening-hours">
+						<div class="col-sm-6 text-center-mobile">
+							<h5 class="light-white light">Mon - Fri</h5>
+							<h3 class="regular white">9:00 - 22:00</h3>
+						</div>
+						<div class="col-sm-6 text-center-mobile">
+							<h5 class="light-white light">Sat - Sun</h5>
+							<h3 class="regular white">10:00 - 18:00</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row bottom-footer text-center-mobile">
+				<div class="col-sm-8">
+					<p>&copy; 2015 All Rights Reserved. Powered by <a href="http://www.phir.co/">PHIr</a> exclusively for <a href="http://tympanus.net/codrops/">Codrops</a></p>
+				</div>
+				<div class="col-sm-4 text-right text-center-mobile">
+					<ul class="social-footer">
+						<li><a href="https://github.com/rafaellg8/gameScrapping"><i class="fa fa-github"></i></a></li>
+						<li><a href="http://www.twitter.com/rafaellg8"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="https://plus.google.com/u/0/103749564663167226601/posts"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Holder for mobile navigation -->
+	<div class="mobile-nav">
+		<ul>
+		</ul>
+		<a href="#" class="close-link"><i class="arrow_up"></i></a>
+	</div>
+	<!-- Scripts -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/typewriter.js"></script>
+	<script src="js/jquery.onepagenav.js"></script>
+	<script src="js/main.js"></script>
 </body>
+
 </html>

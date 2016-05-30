@@ -1,15 +1,9 @@
 package com.gamecomparator.model;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import javax.persistence.EntityManager;
 
 import com.gamecomparator.PMF;
-import com.google.appengine.api.NamespaceManager;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 /**
