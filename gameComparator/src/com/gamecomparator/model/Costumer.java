@@ -106,5 +106,13 @@ public class Costumer {
 			return false;
 		
 	}
+	
+	/**
+	 * Sobrecarga toString
+	 */
+	@Override
+	public String toString(){
+		return username+" "+email+" "+password;
+	}
 
 }

@@ -81,20 +81,20 @@
 		</header>
 
 		<!-- Registro de usuarios -->
-		<section style="width: 100%;">
-			<div class="log">
-				<span class="glyphicon glyphicon-log-in"><a href="<%=url%>"><%=urlLinktext%></a>
-					<%if (user == null) {%>
-					<form action="/login" method="post">
-						<div>Nombre usuario: <input type="text" name="username"/></div>
-						<div>Email: <input type="email" name="email"/></div>
-						<div>Contraseña: <input type="password" name="password"/></div>
-						<input type="submit" value="Crear Usuario"/>
-					</form>
-					<%}%>
-					</span>
-			</div>
-		</section>
+<!-- 		<section style="width: 100%;"> -->
+<!-- 			<div class="log"> -->
+<%-- 				<span class="glyphicon glyphicon-log-in"><a href="<%=url%>"><%=urlLinktext%></a> --%>
+<%-- 					<%if (user == null) {%> --%>
+<!-- 					<form action="/login" method="post"> -->
+<!-- 						<div>Nombre usuario: <input type="text" name="username"/></div> -->
+<!-- 						<div>Email: <input type="email" name="email"/></div> -->
+<!-- 						<div>Contraseña: <input type="password" name="password"/></div> -->
+<!-- 						<input type="submit" value="Crear Usuario"/> -->
+<!-- 					</form> -->
+<%-- 					<%}%> --%>
+<!-- 					</span> -->
+<!-- 			</div> -->
+<!-- 		</section> -->
 		
 		<!-- Logueo de usuarios -->
 		<section style="width: 100%;">

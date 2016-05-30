@@ -1,6 +1,7 @@
 package com.gamecomparator;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,9 +14,12 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import javax.servlet.http.HttpSession;
 
+import org.apache.geronimo.mail.util.SessionUtil;
+
 
 @SuppressWarnings("serial")
 public class UsersServlet extends HttpServlet {
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		        // we do not set content type, headers, cookies etc.
 		        // resp.setContentType("text/html"); // while redirecting as
@@ -31,25 +35,26 @@ public class UsersServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 		      throws IOException {
 		    System.out.println("Login o registro de usuarios");
-		    //Logueo 
-		    if (req.getAttribute("login").equals(true)){		      
-		    	  //Traemos la query y comprobamos el usuario
-		      	  Costumer result = CostumerDC.getCostumer(req.getParameter("username")); //Query para el usuario
-		      	  if (result.isPassword(req.getParameter("password"))) {//Comprobamos contraseña
-		      		//Si es correcta abrimos la sesion
-		      		  req.setAttribute("user",result); //Abrimos la sesion con el objeto
-		      	  }
+		    //Si existe el usuario lo logeamos sino contraseña incorrecta
+		    Costumer login = CostumerDC.getCostumer(req.getParameter("username"));
+		    if (login.isPassword(req.getParameter("password"))){ //Si coinciden contraseñas logueamos
+		    	HttpSession session = req.getSession(true);
+		    	
+		    	session.setAttribute("user", login.getName());
+		    }
+		    else{
+		    	resp.sendRedirect("index.jsp");
 		    }
 		    //Si el usuario no se logueo es que quiere registrarse
-		    else{
-		    Costumer costumer = new Costumer(req.getParameter("username"),
-					req.getParameter("email"),
-					req.getParameter("password"));
-		    //Aañadimos el usuario al datastore
-			CostumerDC.add(costumer);	
-		    
-			req.setAttribute("user", req.getParameter("username")); //Creamos variable en sesion del usuario
-		    }
+//		    else{
+//		    Costumer costumer = new Costumer(req.getParameter("username"),
+//					req.getParameter("email"),
+//					req.getParameter("password"));
+//		    //Aañadimos el usuario al datastore
+//			CostumerDC.add(costumer);	
+//		    
+//			req.setAttribute("user", req.getParameter("username")); //Creamos variable en sesion del usuario
+//		    }
 		    resp.sendRedirect("index.jsp");
 		  }
 

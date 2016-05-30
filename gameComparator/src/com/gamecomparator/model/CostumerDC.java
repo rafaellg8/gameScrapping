@@ -71,6 +71,7 @@ public class CostumerDC {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Query q = pm.newQuery(Costumer.class); //Declaramos la query
 		q.setFilter("username == usernameParam");
+		q.declareParameters("String usernameParam"); //Declaramos parametros
 		q.setUnique(true); //trae solo un objeto
 		Costumer result = null;
 		try{

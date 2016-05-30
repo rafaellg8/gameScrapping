@@ -33,26 +33,22 @@
 </head>
 <body id="page1">
 	<%
-		//Login de usuarios de google
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-
-		//si no esta logeado creamos el login de google
+		//Usuario local
+		Costumer userLocal = null;
+		if (session.getLastAccessedTime() != 0){
+			String aux = session.getAttribute("user").toString();
+			userLocal = CostumerDC.getCostumer(aux);
+		}
+			//Si la session esta abierta traemos el obeto costumer completo
+		
+	//si no esta logeado creamos el login de google
 		String url ="";
 		String urlLinktext = "";
 
 		//si esta logeado ponemos el logout
-		if (user != null) {
-			url = userService.createLogoutURL(request.getRequestURI());
+		if (userLocal != null) {
+			url = "/logout";
 			urlLinktext = "Logout";
-			if (CostumerDC.getCostumer(user.getNickname())!=null) {//Si el usuario esta ya en el datastore lo traemos
-				Costumer costumer;
-				costumer = CostumerDC.getCostumer(user.getNickname());
-			}
-			else{
-				url = "/login";
-				urlLinktext = "Registrarse";
-		}
 		}
 		//Usuario sin loguear
 		else{
@@ -85,7 +81,7 @@
 		<div style="width: 100%;">
 			<div class="log">
 				<span class="glyphicon glyphicon-log-in"><a href="<%=url%>"><%=urlLinktext%></a>
-					<%=(user == null ? "LOGIN" : user.getNickname())%></span>
+					<%=(userLocal == null ? "LOGIN" : userLocal.getName())%></span>
 			</div>
 		</div>
 		
