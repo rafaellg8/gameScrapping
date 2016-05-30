@@ -29,18 +29,26 @@ public class UsersServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		System.out.println("Login o registro de usuarios");
-		if (req.getParameter("check").equals("register") && req.getAttribute("session")==null) //Si esta el checkbox es de la parte del registro
+		if (req.getParameter("check")!=null) //Si esta el checkbox es de la parte del registro
 			Register(req, resp); //Redirecciono al registro
 		
 		// Si existe el usuario lo logeamos sino contraseña incorrecta
 		Costumer login = CostumerDC.getCostumer(req.getParameter("username"));
-		if (login.isPassword(req.getParameter("password"))) { // Si coinciden
-																// contraseñas
-																// logueamos
-			HttpSession session = req.getSession(true);
-			session.setAttribute("user", login.getName());
+		if (login != null)
+			if (login.isPassword(req.getParameter("password"))) { // Si coinciden
+																	// contraseñas
+																	// logueamos
+				HttpSession session = req.getSession(true);
+				session.setAttribute("user", login.getName());
 		} else {
-			resp.sendError(0, "Contraseña incorrecta o usuario no registrado");
+//			resp.sendError(0, "Contraseña incorrecta o usuario no registrado");
+			resp.sendRedirect("index.jsp");
+
+		}
+		else{
+//			resp.sendError(0, "Usuario no registrado");
+			resp.sendRedirect("index.jsp");
+
 		}
 		resp.sendRedirect("home.jsp");
 	}
@@ -52,6 +60,7 @@ public class UsersServlet extends HttpServlet {
 		CostumerDC.add(costumer);
 		req.setAttribute("session", "open");
 		//Abrimos la sesion al usuario
-		doPost(req,resp);
+//		doPost(req,resp);
+		resp.sendRedirect("index.jsp");
 	}
 }
