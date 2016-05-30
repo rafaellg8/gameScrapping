@@ -80,7 +80,7 @@
 			</h1>
 		</header>
 
-
+		<!-- Registro de usuarios -->
 		<section style="width: 100%;">
 			<div class="log">
 				<span class="glyphicon glyphicon-log-in"><a href="<%=url%>"><%=urlLinktext%></a>
@@ -90,6 +90,22 @@
 						<div>Email: <input type="email" name="email"/></div>
 						<div>Contraseña: <input type="password" name="password"/></div>
 						<input type="submit" value="Crear Usuario"/>
+					</form>
+					<%}%>
+					</span>
+			</div>
+		</section>
+		
+		<!-- Logueo de usuarios -->
+		<section style="width: 100%;">
+			<div class="log">
+				<span class="glyphicon glyphicon-log-in"><a href="<%=url%>"><%=urlLinktext%></a>
+					<%if (user == null) {%>
+					<%request.setAttribute("login", true); %> <!-- usuario que ses va a loguear -->
+					<form action="/login" method="post">
+						<div>Nombre usuario: <input type="text" name="username"/></div>
+						<div>Contraseña: <input type="password" name="password"/></div>
+						<input type="submit" value="LOGIN"/>
 					</form>
 					<%}%>
 					</span>

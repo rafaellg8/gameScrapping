@@ -7,6 +7,8 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.Unique;
+
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.labs.repackaged.com.google.common.hash.HashFunction;
 import java.security.MessageDigest;
@@ -20,6 +22,7 @@ public class Costumer {
     private Key key;
 	
     @Persistent
+    @Unique
     private String username;
 	
     @Persistent

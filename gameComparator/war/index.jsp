@@ -54,6 +54,11 @@
 				urlLinktext = "Registrarse";
 		}
 		}
+		//Usuario sin loguear
+		else{
+			url = "/login";
+			urlLinktext = "LOGIN";
+		}
 	%>
 
 	<div class="main">
@@ -80,7 +85,7 @@
 		<div style="width: 100%;">
 			<div class="log">
 				<span class="glyphicon glyphicon-log-in"><a href="<%=url%>"><%=urlLinktext%></a>
-					<%=(user == null ? "" : user.getNickname())%></span>
+					<%=(user == null ? "LOGIN" : user.getNickname())%></span>
 			</div>
 		</div>
 		

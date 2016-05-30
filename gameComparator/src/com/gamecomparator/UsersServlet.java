@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 
 @SuppressWarnings("serial")
-public class GameScrappingServlet extends HttpServlet {
+public class UsersServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		        // we do not set content type, headers, cookies etc.
 		        // resp.setContentType("text/html"); // while redirecting as
@@ -31,18 +31,25 @@ public class GameScrappingServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 		      throws IOException {
 		    System.out.println("Login o registro de usuarios");
-		    User user = (User) req.getAttribute("user");
-		    if (user == null) {
-		      UserService userService = UserServiceFactory.getUserService();
-		      user = userService.getCurrentUser();
+		    //Logueo 
+		    if (req.getAttribute("login").equals(true)){		      
+		    	  //Traemos la query y comprobamos el usuario
+		      	  Costumer result = CostumerDC.getCostumer(req.getParameter("username")); //Query para el usuario
+		      	  if (result.isPassword(req.getParameter("password"))) {//Comprobamos contraseña
+		      		//Si es correcta abrimos la sesion
+		      		  req.setAttribute("user",result); //Abrimos la sesion con el objeto
+		      	  }
 		    }
-
+		    //Si el usuario no se logueo es que quiere registrarse
+		    else{
 		    Costumer costumer = new Costumer(req.getParameter("username"),
 					req.getParameter("email"),
 					req.getParameter("password"));
 		    //Aañadimos el usuario al datastore
 			CostumerDC.add(costumer);	
 		    
+			req.setAttribute("user", req.getParameter("username")); //Creamos variable en sesion del usuario
+		    }
 		    resp.sendRedirect("index.jsp");
 		  }
 
