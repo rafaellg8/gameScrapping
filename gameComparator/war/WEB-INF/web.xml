@@ -6,12 +6,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<servlet>
 		<servlet-name>index</servlet-name>
-		<jsp-file>index.jsp</jsp-file>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>logout</servlet-name>
-		<jsp-file>logout.jsp</jsp-file>
+		<jsp-file>/index.jsp</jsp-file>
 	</servlet>
 	
 	<servlet>
@@ -40,10 +35,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
 	
-	<servlet-mapping>
-		<servlet-name>logout</servlet-name>
-		<url-pattern>/logout</url-pattern>
-	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
