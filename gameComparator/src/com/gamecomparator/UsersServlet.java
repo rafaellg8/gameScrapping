@@ -1,6 +1,7 @@
 package com.gamecomparator;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,39 +29,61 @@ public class UsersServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		System.out.println("Login o registro de usuarios");
-		if (req.getParameter("check")!=null) //Si esta el checkbox es de la parte del registro
-			Register(req, resp); //Redirecciono al registro
-		
+		if (req.getParameter("check") != null){ // Si esta el checkbox es de la parte del registro
+			Register(req, resp); // Redirecciono al registro
+		}
+
 		// Si existe el usuario lo logeamos sino contraseña incorrecta
 		Costumer login = CostumerDC.getCostumer(req.getParameter("username"));
-		if (login != null)
-			if (login.isPassword(req.getParameter("password"))) { // Si coinciden
+		if (login != null) {
+			//Solo registro no se introduce el email
+			if (login.isPassword(req.getParameter("password")) && req.getParameter("email")==null) { // Si
+																	// coinciden
 																	// contraseñas
 																	// logueamos
 				HttpSession session = req.getSession(true);
 				session.setAttribute("user", login.getName());
+				resp.sendRedirect("home.jsp");
+			} else {
+				// resp.sendError(0, "Contraseña incorrecta o usuario no
+				// registrado");
+				PrintWriter out = resp.getWriter();
+				resp.setContentType("text/html");  
+				out.println("<script type=\"text/javascript\">");
+				out.println("window.alert('User or password incorrect');");
+				out.println("location='index.jsp';");
+				out.println("</script>");
+			}
 		} else {
-//			resp.sendError(0, "Contraseña incorrecta o usuario no registrado");
-			resp.sendRedirect("index.jsp");
-
+			PrintWriter out = resp.getWriter();
+			resp.setContentType("text/html");  
+			out.println("<script type=\"text/javascript\">");
+			out.println("window.alert('No registered user');");
+			out.println("location='index.jsp';");
+			out.println("</script>");
 		}
-		else{
-//			resp.sendError(0, "Usuario no registrado");
-			resp.sendRedirect("index.jsp");
-
-		}
-		resp.sendRedirect("home.jsp");
 	}
 
 	public void Register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		Costumer costumer = new Costumer(req.getParameter("username"), req.getParameter("email"),
 				req.getParameter("password"));
-		// Aañadimos el usuario al datastore
+		//Compbrobamos que el usario no esta en la base de datos
+		if (CostumerDC.getCostumer(req.getParameter("username"))==null){
+			// Añadimos el usuario al datastore
 		CostumerDC.add(costumer);
 		req.setAttribute("session", "open");
-		//Abrimos la sesion al usuario
-//		doPost(req,resp);
+		// Abrimos la sesion al usuario
+		// doPost(req,resp);
 		resp.sendRedirect("index.jsp");
+		}
+		else{
+			PrintWriter out = resp.getWriter();
+			resp.setContentType("text/html");  
+			out.println("<script type=\"text/javascript\">");
+			out.println("window.alert('Use a different username please');");
+			out.println("location='index.jsp';");
+			out.println("</script>");
+			resp.reset();
+		}
 	}
 }
