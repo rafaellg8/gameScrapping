@@ -29,9 +29,11 @@ public class CMPServlet extends HttpServlet {
             // Obtengo el HTML de la web en un objeto Document2
             Document document = getHtmlDocument(urlPage);
 			
-            // Busco todas las historias de meneame que estan dentro de: 
-            Elements entradas = document.select("col-sm-3 result-modul-grid");
-			
+            Elements entradas = document.select("div.col-sm-3.result-modul-grid");
+
+//            Elements entradas = document.select("div.col-xs-12.mask");
+
+            
             // Paseo cada una de las entradas
             for (Element elem : entradas) {
                 String titulo = elem.getElementsByClass("tit-result").text();
@@ -46,7 +48,7 @@ public class CMPServlet extends HttpServlet {
             System.out.println("El Status Code no es OK es: "+getStatusConnectionCode(urlPage));
             
         }
-        RequestDispatcher view = req.getRequestDispatcher("index.jsp");
+        RequestDispatcher view = req.getRequestDispatcher("games.jsp");
     	// don't add your web-app name to the path
 
     	view.forward(req, resp);

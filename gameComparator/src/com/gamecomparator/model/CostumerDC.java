@@ -31,7 +31,6 @@ public class CostumerDC {
 
 	public static void add(Costumer costumer) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		costumer.toString();
 		try {
 			Key key = KeyFactory.createKey(Costumer.class.getSimpleName(), costumer.getEmail()+ " "+ costumer.getName());
 			costumer.setKey(key);
@@ -68,17 +67,12 @@ public class CostumerDC {
 		q.declareParameters("String usernameParam"); //Declaramos parametros
 		q.setUnique(true); //trae solo un objeto
 		Costumer result = null;
-		try{
+		
 			result = (Costumer)q.execute(usernameParam); //nos trae de resultado el usuario
-		}
-		catch(Exception e){
-			System.out.println("Error en la query de usuario");
-			System.err.println(e.getStackTrace());
-		}
-		finally{
+		
 			q.closeAll();
 			pm.close();
-		}
+		
 		return result;
 	}
 }
