@@ -21,8 +21,8 @@ public class CMPServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 	
     
-		String urlPage = "http:\\www.game.es/videojuegos/juegos-pc-digital";  
-    	
+		String urlPage = "https://www.game.es/videojuegos/juegos-pc-digital";  
+    	System.out.println("HOLA");
         // Compruebo si me da un 200 al hacer la petición
         if (getStatusConnectionCode(urlPage) == 200) {
 			
@@ -46,7 +46,7 @@ public class CMPServlet extends HttpServlet {
             System.out.println("El Status Code no es OK es: "+getStatusConnectionCode(urlPage));
             
         }
-        RequestDispatcher view = req.getRequestDispatcher("games.jsp");
+        RequestDispatcher view = req.getRequestDispatcher("index.jsp");
     	// don't add your web-app name to the path
 
     	view.forward(req, resp);

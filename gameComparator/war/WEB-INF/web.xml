@@ -17,6 +17,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Register</servlet-name>
 		<servlet-class>com.gamecomparator.UsersServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>GameList</servlet-name>
+		<servlet-class>com.gamecomparator.CMPServlet</servlet-class>
+	</servlet>
 
 	<!-- Mapeo de url y nombres de servlets -->
 
@@ -33,6 +37,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>GameList</servlet-name>
+		<url-pattern>/games</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
