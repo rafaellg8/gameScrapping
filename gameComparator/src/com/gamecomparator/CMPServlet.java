@@ -120,7 +120,7 @@ public class CMPServlet extends HttpServlet {
             System.out.println("El Status Code no es OK es: "+getStatusConnectionCode(urlPage));
             
         }
-        
+        //Pasamos el array de games por los atributos de la respuesta
         req.setAttribute("game",games);
         RequestDispatcher view = req.getRequestDispatcher("games.jsp");
     	// don't add your web-app name to the path
@@ -135,25 +135,25 @@ public class CMPServlet extends HttpServlet {
 	 * @throws ServletException
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
-
+		//Recibimos el objeto array de games a través de la sesion
 		HttpSession session = req.getSession();
 		if (session.getAttribute("games")!=null){
 		@SuppressWarnings("unchecked")
-		ArrayList<Game> gameList = ((ArrayList<Game>)session.getAttribute("games"));
+		Game game = (Game)session.getAttribute("games");
 		
 		//Añadir objetos al datastore
-		for (Game game: gameList){
+		
 			Costumer aux = CostumerDC.getCostumer((String) req.getSession().getAttribute("user"));
 			game.setCostumer(aux.getName());
 			GameDC.add(game);
-			}
+		
 		}
 		
 		PrintWriter out = resp.getWriter();
 		resp.setContentType("text/html");  
 		out.println("<script type=\"text/javascript\">");
 		out.println("window.alert('Games added');");
-		out.println("location='games.jsp';");
+		out.println("location='/games';");
 		out.println("</script>");
 		
 	}

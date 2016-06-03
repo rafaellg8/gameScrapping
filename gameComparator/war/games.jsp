@@ -29,6 +29,11 @@
 			url = "logout.jsp";
 			urlLinktext = "Logout";
 	%>
+	
+	<!-- Mas Vendidos -->
+	<% ArrayList<Game> obj = (ArrayList<Game>) request.getAttribute("game");
+						
+	%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +90,7 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right main-nav">
-					<li><a href="#intro">Intro</a></li>
+					<li><a href="#top">Top Selled</a></li>
 					<li><a href="#services">Services</a></li>
 					<li><a href="#games">Games</a></li>
 					<li><%=userLocal.getName() %><img src="img/icons/png/nerd.png" alt="Avatar Image" class="avatar"></li>
@@ -103,7 +108,7 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<h3 class="light white">Game comparator</h3>
-							<h1 class="white typed">Bienvenido : <%=userLocal.getName()%></h1>
+							<h1 class="white typed">Best selled games</h1>
 							<span class="typed-cursor">|</span>
 						</div>
 					</div>
@@ -111,108 +116,126 @@
 			</div>
 		</div>
 	</header>
-	<section>
-		<div class="cut cut-top"></div>
-		<div class="container">
-			<div class="row intro-tables">
-				<div class="col-md-4">
-					<div class="intro-table intro-table-first">
-						<h5 class="white heading">Top Juegos</h5>
-						<div class="owl-carousel owl-schedule bottom">
-						
-						<!-- Mas Vendidos -->
-						<% ArrayList<Game> obj = (ArrayList<Game>) request.getAttribute("game");
-						
- 					%>
+	
+	
+<!-- 	<section> -->
+<!-- 		<div class="cut cut-top"></div> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="row intro-tables"> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<div class="intro-table intro-table-first"> -->
+<!-- 						<h5 class="white heading">Top Juegos</h5> -->
+<!-- 						<div class="owl-carousel owl-schedule bottom">							 -->
 							
-							
-							<div class="item">
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Early Exercise</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Muscle Building</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Cardio</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Early Exercise</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Muscle Building</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Cardio</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="intro-table intro-table-hover">
-						<h5 class="white heading hide-hover">Premium Membership</h5>
-						<div class="bottom">
-							<h4 class="white heading small-heading no-margin regular">Register Today</h4>
-							<h4 class="white heading small-pt">20% Discount</h4>
-							<a href="#" class="btn btn-white-fill expand">Register</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="intro-table intro-table-third">
-						<h5 class="white heading">Happy Clients</h5>
-						<div class="owl-testimonials bottom">
-							<div class="item">
-								<h4 class="white heading content">I couldn't be more happy with the results!</h4>
-								<h5 class="white heading light author">Adam Jordan</h5>
-							</div>
-							<div class="item">
-								<h4 class="white heading content">I can't believe how much better I feel!</h4>
-								<h5 class="white heading light author">Greg Pardon</h5>
-							</div>
-							<div class="item">
-								<h4 class="white heading content">Incredible transformation and I feel so healthy!</h4>
-								<h5 class="white heading light author">Christina Goldman</h5>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<!-- 							<div class="item"> -->
+<!-- 								<div class="schedule-row row"> -->
+<!-- 									<div class="col-xs-6"> -->
+<!-- 										<h5 class="regular white">Early Exercise</h5> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-xs-6 text-right"> -->
+<!-- 										<h5 class="white">8:30 - 10:00</h5> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<div class="schedule-row row"> -->
+<!-- 									<div class="col-xs-6"> -->
+<!-- 										<h5 class="regular white">Muscle Building</h5> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-xs-6 text-right"> -->
+<!-- 										<h5 class="white">8:30 - 10:00</h5> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<div class="schedule-row row"> -->
+<!-- 									<div class="col-xs-6"> -->
+<!-- 										<h5 class="regular white">Cardio</h5> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-xs-6 text-right"> -->
+<!-- 										<h5 class="white">8:30 - 10:00</h5> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="item"> -->
+<!-- 								<div class="schedule-row row"> -->
+<!-- 									<div class="col-xs-6"> -->
+<!-- 										<h5 class="regular white">Early Exercise</h5> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-xs-6 text-right"> -->
+<!-- 										<h5 class="white">8:30 - 10:00</h5> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<div class="schedule-row row"> -->
+<!-- 									<div class="col-xs-6"> -->
+<!-- 										<h5 class="regular white">Muscle Building</h5> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-xs-6 text-right"> -->
+<!-- 										<h5 class="white">8:30 - 10:00</h5> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<div class="schedule-row row"> -->
+<!-- 									<div class="col-xs-6"> -->
+<!-- 										<h5 class="regular white">Cardio</h5> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-xs-6 text-right"> -->
+<!-- 										<h5 class="white">8:30 - 10:00</h5> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<div class="intro-table intro-table-hover"> -->
+<!-- 						<h5 class="white heading hide-hover">Premium Membership</h5> -->
+<!-- 						<div class="bottom"> -->
+<!-- 							<h4 class="white heading small-heading no-margin regular">Register Today</h4> -->
+<!-- 							<h4 class="white heading small-pt">20% Discount</h4> -->
+<!-- 							<a href="#" class="btn btn-white-fill expand">Register</a> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<div class="intro-table intro-table-third"> -->
+<!-- 						<h5 class="white heading">Happy Clients</h5> -->
+<!-- 						<div class="owl-testimonials bottom"> -->
+<!-- 							<div class="item"> -->
+<!-- 								<h4 class="white heading content">I couldn't be more happy with the results!</h4> -->
+<!-- 								<h5 class="white heading light author">Adam Jordan</h5> -->
+<!-- 							</div> -->
+<!-- 							<div class="item"> -->
+<!-- 								<h4 class="white heading content">I can't believe how much better I feel!</h4> -->
+<!-- 								<h5 class="white heading light author">Greg Pardon</h5> -->
+<!-- 							</div> -->
+<!-- 							<div class="item"> -->
+<!-- 								<h4 class="white heading content">Incredible transformation and I feel so healthy!</h4> -->
+<!-- 								<h5 class="white heading light author">Christina Goldman</h5> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
+	
+	  <div class="container" id="top">
+      <!-- Example row of columns -->
+      <div class="row">
+      <% for (Game game: obj){%>
+        <div class="col-md-4 item">
+          <h4 class="blue heading content"><%=game.getName()%></h4>
+          <img alt="imagen<%=game.getName()%>" src=<%=game.getImage()%> width="120px" height="120px">
+          <h5><%=game.getPrice()%></h5>
+							<form action="/games" method="post">
+							<!-- Aniadimos a la sesion -->
+							<% session.setAttribute("game", game); %>
+								<button type="submit" class="btn btn-blue">Add Favorite &raquo;</button>
+							</form>
+        </div>
+      <%} %><!-- Cierro for -->
+      </div>
+         <hr>
+    </div> <!-- /container -->
+	  
+	
+	
 	<section id="services" class="section section-padded">
 		<div class="container">
 			<div class="row text-center title">
@@ -234,8 +257,8 @@
 						<div class="icon-holder">
 							<img src="img/icons/png/mushroom.png" alt="" class="icon">
 						</div>
-						<h4 class="heading">Ratings</h4>
-						<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>
+						<h4 class="heading">Favorites</h4>
+						<p class="description">List of favorites games</p>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -243,8 +266,8 @@
 						<div class="icon-holder">
 							<img src="img/icons/png/technology.png" alt="" class="icon">
 						</div>
-						<h4 class="heading">Others</h4>
-						<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>
+						<h4 class="heading">Others Games</h4>
+						<p class="description">Other games</p>
 					</div>
 				</div>
 			</div>
@@ -252,34 +275,34 @@
 		<div class="cut cut-bottom"></div>
 	</section>
 
-	<section class="section section-padded blue-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<div class="owl-twitter owl-carousel">
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
-						</div>
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
-						</div>
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<!-- 	<section class="section section-padded blue-bg"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-8 col-md-offset-2"> -->
+<!-- 					<div class="owl-twitter owl-carousel"> -->
+<!-- 						<div class="item text-center"> -->
+<!-- 							<i class="icon fa fa-twitter"></i> -->
+<!-- 							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4> -->
+<!-- 							<h4 class="light-white light">#health #training #exercise</h4> -->
+<!-- 						</div> -->
+<!-- 						<div class="item text-center"> -->
+<!-- 							<i class="icon fa fa-twitter"></i> -->
+<!-- 							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4> -->
+<!-- 							<h4 class="light-white light">#health #training #exercise</h4> -->
+<!-- 						</div> -->
+<!-- 						<div class="item text-center"> -->
+<!-- 							<i class="icon fa fa-twitter"></i> -->
+<!-- 							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4> -->
+<!-- 							<h4 class="light-white light">#health #training #exercise</h4> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
 
 	
- 
+   
 
 <!-- TOP JUEGOS -->
 	<footer id="games">
@@ -299,21 +322,13 @@
 						<div class="col-sm-6 text-center-mobile">
 							<h5 class="light-white light"><%=game.getName()%></h5>
 							<img alt="imagen<%=game.getName()%>" src=<%=game.getImage()%>>
-							<h3 class="regular white"><%=game.getPrice()%></h3>
 						</div>
 						<div class="col-sm-6 text-center-mobile">
-							<h5 class="light-white light">Sat - Sun</h5>
-							<h3 class="regular white">10:00 - 18:00</h3>
+							<h5 class="light-white light">Price</h5>
+							<h3 class="regular white"><%=game.getPrice()%></h3>
 						</div>
 					</div>
 					<%} %>
-					<div class="col-sm-4 text-center-mobile">
-						<form action="/games" method="post">
-						<!-- Aniadimos a la sesion -->
-						<% session.setAttribute("games", obj); %>
-							<button type="submit" class="btn btn-submit">Add Favorites</button>
-						</form>
-					</div>
 				</div>
 			</div>
 			<div class="row bottom-footer text-center-mobile">
