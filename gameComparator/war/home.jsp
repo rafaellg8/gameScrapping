@@ -12,7 +12,7 @@
 			userLocal = CostumerDC.getCostumer(aux);
 		}
 		else{ //Sesion cerrada abrimos index.jsp
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("/index");
 		}
 			//Si la session esta abierta traemos el obeto costumer completo
 		
@@ -108,6 +108,7 @@
 	</header>
 	
 	
+
 	<section id="services" class="section section-padded">
 		<div class="container">
 			<div class="row text-center title">
@@ -117,31 +118,35 @@
 			<div class="row services">
 				<div class="col-md-4">
 					<div class="service">
-						<a href="/games">
-							<div class="icon-holder">
-								<img src="img/icons/png/game-controller-1.png" alt="" class="icon">
-							</div>
-							<h4 class="heading">Games</h4>
-							<p class="description">Best Games</p>
+					<a href="/games#top">
+						<div class="icon-holder">
+							<img src="img/icons/png/game-controller-1.png" alt="" class="icon">
+						</div>
+						<h4 class="heading">Games</h4>
+						<p class="description">Top Games</p>
 						</a>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="service">
+						<a href="/favorites">
 						<div class="icon-holder">
 							<img src="img/icons/png/mushroom.png" alt="" class="icon">
 						</div>
-						<h4 class="heading">Ratings</h4>
-						<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>
+						<h4 class="heading">Favorites</h4>
+						<p class="description">List of favorites games</p>
+						</a>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="service">
+					<a href="/moregames">
 						<div class="icon-holder">
 							<img src="img/icons/png/technology.png" alt="" class="icon">
 						</div>
-						<h4 class="heading">Others</h4>
-						<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>
+						<h4 class="heading">More Games</h4>
+						<p class="description">More fantastic games</p>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -338,7 +343,7 @@
 			</div>
 			<div class="row bottom-footer text-center-mobile">
 				<div class="col-sm-8">
-					<p>&copy; 2015 All Rights Reserved. Powered by <a href="http://www.phir.co/">PHIr</a> exclusively for <a href="http://tympanus.net/codrops/">Codrops</a></p>
+					<p>&copy; 2016 Rafael Lachica Garrido. Powered by <a href="http://www.phir.co/">PHIr</a> exclusively for <a href="http://tympanus.net/codrops/">Codrops</a></p>
 				</div>
 				<div class="col-sm-4 text-right text-center-mobile">
 					<ul class="social-footer">

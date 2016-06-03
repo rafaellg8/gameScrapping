@@ -14,7 +14,7 @@ import com.google.appengine.labs.repackaged.com.google.common.hash.HashFunction;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-@PersistenceCapable
+@PersistenceCapable()
 public class Costumer {
 	
     @PrimaryKey

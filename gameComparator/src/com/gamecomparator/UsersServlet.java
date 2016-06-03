@@ -24,7 +24,7 @@ public class UsersServlet extends HttpServlet {
 		// "/" is relative to the context root (your web-app name)
 		RequestDispatcher view = req.getRequestDispatcher("index.jsp");
 		// don't add your web-app name to the path
-
+		
 		view.forward(req, resp);
 	}
 
@@ -45,7 +45,7 @@ public class UsersServlet extends HttpServlet {
 				session.setAttribute("user", login.getName());
 				resp.sendRedirect("home.jsp");
 			} else {
-				// resp.sendError(0, "Contrase�a incorrecta o usuario no
+				// resp.sendError(0, "Contrasena incorrecta o usuario no
 				// registrado");
 				PrintWriter out = resp.getWriter();
 				resp.setContentType("text/html");  
@@ -69,7 +69,7 @@ public class UsersServlet extends HttpServlet {
 				req.getParameter("password"));
 		//Compbrobamos que el usario no esta en la base de datos
 		if (CostumerDC.getCostumer(req.getParameter("username"))==null){
-			// A�adimos el usuario al datastore
+			// Anadimos el usuario al datastore
 		CostumerDC.add(costumer);
 		req.setAttribute("session", "open");
 		// Abrimos la sesion al usuario

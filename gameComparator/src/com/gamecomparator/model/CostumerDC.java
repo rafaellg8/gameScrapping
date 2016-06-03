@@ -70,9 +70,7 @@ public class CostumerDC {
 		
 			result = (Costumer)q.execute(usernameParam); //nos trae de resultado el usuario
 		
-			q.closeAll();
-			pm.close();
-		
+			q.closeAll();		
 		return result;
 	}
 }

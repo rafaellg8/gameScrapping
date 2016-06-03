@@ -10,6 +10,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet>
 	
 	<servlet>
+		<servlet-name>favorites</servlet-name>
+		<servlet-class>com.gamecomparator.FavoritesServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>Login</servlet-name>
 		<servlet-class>com.gamecomparator.UsersServlet</servlet-class>
 	</servlet>
@@ -27,6 +32,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>index</servlet-name>
 		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>favorites</servlet-name>
+		<url-pattern>/favorites</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

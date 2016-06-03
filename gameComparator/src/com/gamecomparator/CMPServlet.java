@@ -137,9 +137,9 @@ public class CMPServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
 		//Recibimos el objeto array de games a través de la sesion
 		HttpSession session = req.getSession();
-		if (session.getAttribute("games")!=null){
+		if (session.getAttribute("game")!=null){
 		@SuppressWarnings("unchecked")
-		Game game = (Game)session.getAttribute("games");
+		Game game = (Game)session.getAttribute("game");
 		
 		//Añadir objetos al datastore
 		
