@@ -1,3 +1,8 @@
+<%@page import="com.google.appengine.api.urlfetch.HTTPRequest"%>
+<%@page import="com.google.appengine.labs.repackaged.org.json.HTTP"%>
+<%@page import="com.gamecomparator.CMPServlet"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.io.ObjectInputStream"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.google.appengine.api.users.User"%>
 <%@ page import="com.google.appengine.api.users.UserService"%>
@@ -82,7 +87,7 @@
 				<ul class="nav navbar-nav navbar-right main-nav">
 					<li><a href="#intro">Intro</a></li>
 					<li><a href="#services">Services</a></li>
-					<li><a href="#team">About</a></li>
+					<li><a href="#games">Games</a></li>
 					<li><%=userLocal.getName() %><img src="img/icons/png/nerd.png" alt="Avatar Image" class="avatar"></li>
 					<li><a href="logout.jsp" class="btn btn-red-fill ripple"><img alt="log-out" src="img/icons/png/log-out.png">Logout</a></li>
 				</ul>
@@ -114,32 +119,13 @@
 					<div class="intro-table intro-table-first">
 						<h5 class="white heading">Top Juegos</h5>
 						<div class="owl-carousel owl-schedule bottom">
-							<div class="item">
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Early Exercise</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Muscle Building</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Cardio</h5>
-									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">8:30 - 10:00</h5>
-									</div>
-								</div>
-							</div>
+						
+						<!-- Mas Vendidos -->
+						<% ArrayList<Game> obj = (ArrayList<Game>) request.getAttribute("game");
+						
+ 					%>
+							
+							
 							<div class="item">
 								<div class="schedule-row row">
 									<div class="col-xs-6">
@@ -292,25 +278,41 @@
 		</div>
 	</section>
 
-	<footer>
+	
+ 
+
+<!-- TOP JUEGOS -->
+	<footer id="games">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 text-center-mobile">
-					<h3 class="white">Last Games Visited</h3>
+					<h3 class="white">Top Games</h3>
 <!-- 					<h5 class="light regular light-white">Shape your body and improve your health.</h5> -->
 <!-- 					<a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a> -->
 				</div>
 				<div class="col-sm-6 text-center-mobile">
-					<h3 class="white">Opening Hours <span class="open-blink"></span></h3>
+					<h3 class="white">Top Selled Games <span class="open-blink"></span></h3>
+					<% 
+						for (Game game: obj){
+ 					%>
 					<div class="row opening-hours">
 						<div class="col-sm-6 text-center-mobile">
-							<h5 class="light-white light">Mon - Fri</h5>
-							<h3 class="regular white">9:00 - 22:00</h3>
+							<h5 class="light-white light"><%=game.getName()%></h5>
+							<img alt="imagen<%=game.getName()%>" src=<%=game.getImage()%>>
+							<h3 class="regular white"><%=game.getPrice()%></h3>
 						</div>
 						<div class="col-sm-6 text-center-mobile">
 							<h5 class="light-white light">Sat - Sun</h5>
 							<h3 class="regular white">10:00 - 18:00</h3>
 						</div>
+					</div>
+					<%} %>
+					<div class="col-sm-4 text-center-mobile">
+						<form action="/games" method="post">
+						<!-- Aniadimos a la sesion -->
+						<% session.setAttribute("games", obj); %>
+							<button type="submit" class="btn btn-submit">Add Favorites</button>
+						</form>
 					</div>
 				</div>
 			</div>

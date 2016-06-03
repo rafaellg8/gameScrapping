@@ -1,17 +1,23 @@
 package com.gamecomparator.model;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.jdo.annotations.ForeignKey;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+
+import org.apache.tools.ant.taskdefs.Javac.ImplementationSpecificArgument;
+
 import com.google.appengine.api.datastore.Key;
 
+@SuppressWarnings("serial")
 @PersistenceCapable
-public class Game {
+public class Game implements Serializable{
 	
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -21,12 +27,60 @@ public class Game {
     private String name;
 	
     @Persistent
-    private Double price;
+    private String price;
 	
     @Persistent
     private Date dateRelease;
-
+    
     @Persistent
+    private String image;
+    
+    @Persistent
+    private String category;
+    
+    @Persistent
+    private String costumer; //Usuario que pone los juegos como favoritos
+
+    public String getCostumer() {
+		return costumer;
+	}
+
+	public void setCostumer(String string) {
+		this.costumer = string;
+	}
+
+	public Game(String titulo, String linkImagen, String price, String category) {
+		this.name = titulo;
+		this.image = linkImagen;
+		this.price = price;
+		this.category = category;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public List<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
+	}
+
+	@Persistent
     private List<Rating> ratings = new ArrayList<Rating>(); //Lista de califiacones
 
 	public Key getKey() {
@@ -45,11 +99,11 @@ public class Game {
 		this.name = name;
 	}
 
-	public Double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
@@ -68,4 +122,5 @@ public class Game {
 	public void setRating(Rating rating) {
 		this.ratings.add(rating);
 	}
+	
 }

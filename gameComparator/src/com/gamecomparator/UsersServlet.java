@@ -33,13 +33,13 @@ public class UsersServlet extends HttpServlet {
 			Register(req, resp); // Redirecciono al registro
 		}
 
-		// Si existe el usuario lo logeamos sino contrase�a incorrecta
+		// Si existe el usuario lo logeamos sino contraseña incorrecta
 		Costumer login = CostumerDC.getCostumer(req.getParameter("username"));
 		if (login != null) {
 			//Solo registro no se introduce el email
 			if (login.isPassword(req.getParameter("password")) && req.getParameter("email")==null) { // Si
 																	// coinciden
-																	// contrase�as
+																	// contraseñas
 																	// logueamos
 				HttpSession session = req.getSession(true);
 				session.setAttribute("user", login.getName());
